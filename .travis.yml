@@ -1,0 +1,36 @@
+language: ruby
+cache:
+- bundler
+install:
+- bundle install
+rvm:
+- 1.9.3
+- 2.0
+- 2.1
+- 2.2
+notifications:
+  email:
+    recipients:
+    - sensu-plugin@sensu-plugins.io
+    on_success: change
+    on_failure: always
+script:
+- bundle exec rake default
+- gem build sensu-plugins-nagios.gemspec
+- gem install sensu-plugins-nagios-*.gem
+deploy:
+  provider: rubygems
+  api_key:
+    secure: pQ5zPr5JYhU/QF4+K4LyBzHBMcYbEBhjwJk6niaN7yMN/GMTdgJqUOKAYcSD6lgl4ok6uLouWxTdVhM6RDsnpyXJ1uYR3fXNbrAepxWOnhZo61voQiuEoHGKwG03YNc/3yHLN8LJkCEV/117hqwUGgaIgXaqliryelpstD6dB80=
+  gem: sensu-plugins-nagios
+  on:
+    tags: true
+    all_branches: true
+    rvm: 1.9.3
+    rvm: 2.0
+    rvm: 2.1
+    rvm: 2.2
+    repo: sensu-plugins/sensu-plugins-nagios
+addons:
+  code_climate:
+    repo_token:
