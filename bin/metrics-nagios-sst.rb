@@ -29,7 +29,7 @@
 require 'sensu-plugin/metric/cli'
 require 'socket'
 require 'nokogiri'
-require 'HTTParty'
+require 'httparty'
 
 class SstMetrics < Sensu::Plugin::Metric::CLI::Graphite
 
